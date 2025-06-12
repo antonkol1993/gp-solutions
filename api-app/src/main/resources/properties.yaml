@@ -4,16 +4,37 @@ server:
 spring:
   application:
     name: api-app
+
   datasource:
     url: jdbc:postgresql://localhost:5432/bank_app
     username: postgres
     password: your_password
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      pool-name: HikariPool
+      max-lifetime: 1800000
+      connection-timeout: 30000
 
   jpa:
     hibernate:
-      ddl-auto: update  # либо validate/create при необходимости
+      ddl-auto: update  # create / validate / none — в зависимости от среды
     show-sql: true
+    open-in-view: false  # рекомендуется отключать при работе с сервис-слоем
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+
+logging:
+  level:
+    org.springframework: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE  # Показать значения параметров
+
+# Для удобства при dev-среде:
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
