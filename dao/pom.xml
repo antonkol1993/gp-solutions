@@ -17,11 +17,14 @@
     <description>dao module</description>
 
     <dependencies>
+        <!--        dependencies of modules-->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>common</artifactId>
-            <version>${version}</version>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
         </dependency>
+
+
         <!-- Spring Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -17,6 +17,13 @@
     <description>model module</description>
 
         <dependencies>
+            <!--dependencies of modules-->
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- Lombok для геттеров/сеттеров -->
             <dependency>
                 <groupId>org.projectlombok</groupId>

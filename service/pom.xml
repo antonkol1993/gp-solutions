@@ -17,10 +17,11 @@
     <description>service module</description>
 
     <dependencies>
+        <!--dependencies of modules-->
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>model</artifactId>
-            <version>${version}</version>
+            <artifactId>dao</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <!--lombok -->
