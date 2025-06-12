@@ -17,6 +17,12 @@
     <description>service module</description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>model</artifactId>
+            <version>${version}</version>
+        </dependency>
+
         <!--lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

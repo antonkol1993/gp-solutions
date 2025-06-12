@@ -16,13 +16,25 @@
     <name>model</name>
     <description>model module</description>
 
-    <dependencies>
-        <!--lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+        <dependencies>
+            <!-- Lombok для геттеров/сеттеров -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- JPA API для аннотаций @Entity и др. -->
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+            </dependency>
+
+            <!-- Валидация (если используешь @NotNull и пр.) -->
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+            </dependency>
+        </dependencies>
+
 </project>
