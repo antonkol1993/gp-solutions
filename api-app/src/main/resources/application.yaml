@@ -4,16 +4,19 @@ server:
 spring:
   application:
     name: api-app
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-anton.xml
+    enabled: true
 
   datasource:
-    url: jdbc:h2:mem:hotel-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
+    url: jdbc:h2:mem:hotel-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;INIT=CREATE SCHEMA IF NOT EXISTS travel_business
+    username: h2A
+    password: 123
     driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update  # create-drop или update — для H2
+      ddl-auto: none
     show-sql: true
     open-in-view: false
     properties:

@@ -1,7 +1,5 @@
 package com.hotel;
 
-import com.hotel.dao.repository.UserRepository;
-import com.hotel.model.entity.Hotel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,12 +11,6 @@ public class ApiAppApplication {
         SpringApplication.run(ApiAppApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner(UserRepository repo) {
-        return args -> {
-
-        };
-    }
 
 
 }

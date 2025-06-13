@@ -6,10 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>bank-app-parent</artifactId>
+	<artifactId>travel-app-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>bank-app-parent</name>
+	<name>travel-app-parent</name>
 
 	<properties>
 		<java.version>21</java.version>
