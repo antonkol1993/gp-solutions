@@ -12,6 +12,7 @@ public class ApiAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(ApiAppApplication.class, args);
     }
+
     @Bean
     CommandLineRunner runner(UserRepository repo) {
         return args -> {
@@ -19,5 +20,6 @@ public class ApiAppApplication {
             System.out.println("✅ Данные успешно добавлены в БД");
         };
     }
+
 
 }
