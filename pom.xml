@@ -12,11 +12,12 @@
 	<name>travel-app-parent</name>
 
 	<properties>
-		<java.version>21</java.version>
+		<java.version>20</java.version>
 		<spring.boot.version>3.5.0</spring.boot.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<postgresql.version>42.7.7</postgresql.version>
 		<h2version>2.3.232</h2version>
+		<liquibase.version>4.30.0</liquibase.version>
 	</properties>
 
 
@@ -41,7 +42,6 @@
 				<groupId>com.h2database</groupId>
 				<artifactId>h2</artifactId>
 				<version>${h2version}</version>
-				<scope>runtime</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

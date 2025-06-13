@@ -8,7 +8,7 @@
 
     <!-- Таблица: amenities -->
     <changeSet id="2" author="anton">
-        <createTable tableName="amenities" schemaName="travel_business">
+        <createTable tableName="amenities">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -20,7 +20,7 @@
 
     <!-- Таблица: hotels -->
     <changeSet id="3" author="anton">
-        <createTable tableName="hotels" schemaName="travel_business">
+        <createTable tableName="hotels">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -34,12 +34,15 @@
 
     <!-- Таблица: rooms -->
     <changeSet id="4" author="anton">
-        <createTable tableName="rooms" schemaName="travel_business">
+        <createTable tableName="rooms">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="hotel_id" type="BIGINT">
-                <constraints nullable="false" foreignKeyName="fk_rooms_hotels" referencedTableName="hotels" referencedColumnNames="id"/>
+                <constraints nullable="false"
+                             foreignKeyName="fk_rooms_hotels"
+                             referencedTableName="hotels"
+                             referencedColumnNames="id"/>
             </column>
             <column name="room_number" type="VARCHAR(50)"/>
             <column name="type" type="VARCHAR(100)"/>
@@ -49,31 +52,33 @@
 
     <!-- Таблица: hotel_amenities (связь M:N) -->
     <changeSet id="5" author="anton">
-        <createTable tableName="hotel_amenities" schemaName="travel_business">
+        <createTable tableName="hotel_amenities">
             <column name="hotel_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="amenity_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <constraints primaryKey="true" primaryKeyName="pk_hotel_amenities" primaryKeyColumnNames="hotel_id, amenity_id"/>
         </createTable>
+
+        <addPrimaryKey
+                tableName="hotel_amenities"
+                columnNames="hotel_id, amenity_id"
+                constraintName="pk_hotel_amenities"/>
 
         <addForeignKeyConstraint
                 baseTableName="hotel_amenities"
                 baseColumnNames="hotel_id"
                 referencedTableName="hotels"
                 referencedColumnNames="id"
-                constraintName="fk_hotel_amenities_hotels"
-                schemaName="travel_business"/>
+                constraintName="fk_hotel_amenities_hotels"/>
 
         <addForeignKeyConstraint
                 baseTableName="hotel_amenities"
                 baseColumnNames="amenity_id"
                 referencedTableName="amenities"
                 referencedColumnNames="id"
-                constraintName="fk_hotel_amenities_amenities"
-                schemaName="travel_business"/>
+                constraintName="fk_hotel_amenities_amenities"/>
     </changeSet>
 
 </databaseChangeLog>
