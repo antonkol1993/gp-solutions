@@ -6,9 +6,9 @@ spring:
     name: api-app
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/bank_app
+    url: jdbc:postgresql://localhost:5432/test_db
     username: postgres
-    password: your_password
+    password: pass
     driver-class-name: org.postgresql.Driver
     hikari:
       maximum-pool-size: 10
