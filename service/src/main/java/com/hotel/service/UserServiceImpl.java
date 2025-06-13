@@ -1,7 +1,7 @@
-package com.bank.service;
+package com.hotel.service;
 
-import com.bank.dao.repository.UserRepository;
-import com.bank.model.entity.UserEntity;
+import com.hotel.dao.repository.UserRepository;
+import com.hotel.model.entity.Hotel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +16,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserEntity save(UserEntity user) {
+    public Hotel save(Hotel user) {
         return userRepository.save(user);
     }
 
     @Override
-    public List<UserEntity> findAll() {
+    public List<Hotel> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public UserEntity findById(Long id) {
+    public Hotel findById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }

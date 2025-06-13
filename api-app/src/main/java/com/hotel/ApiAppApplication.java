@@ -1,7 +1,7 @@
-package com.bank;
+package com.hotel;
 
-import com.bank.dao.repository.UserRepository;
-import com.bank.model.entity.UserEntity;
+import com.hotel.dao.repository.UserRepository;
+import com.hotel.model.entity.Hotel;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,8 +16,7 @@ public class ApiAppApplication {
     @Bean
     CommandLineRunner runner(UserRepository repo) {
         return args -> {
-            repo.save(new UserEntity(null, "Test Name","antonkol1993@gmail.com"));
-            System.out.println("✅ Данные успешно добавлены в БД");
+
         };
     }
 

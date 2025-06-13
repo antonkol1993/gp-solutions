@@ -1,9 +1,9 @@
-package com.bank.controller;
+package com.hotel.controller;
 
-import com.bank.dto.UserDto;
-import com.bank.model.entity.UserEntity;
-import com.bank.service.UserMapper;
-import com.bank.service.UserService;
+import com.hotel.dto.UserDto;
+import com.hotel.model.entity.Hotel;
+import com.hotel.service.UserMapper;
+import com.hotel.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class UserController {
 
     @PostMapping
     public UserDto create(@RequestBody UserDto dto) {
-        UserEntity saved = userService.save(UserMapper.toEntity(dto));
+        Hotel saved = userService.save(UserMapper.toEntity(dto));
         return UserMapper.toDto(saved);
     }
 
