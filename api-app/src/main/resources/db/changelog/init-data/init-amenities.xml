@@ -8,72 +8,89 @@
     <changeSet id="ins-data-amenity-1" author="anton">
         <insert tableName="amenities">
             <column name="name" value="Free WiFi"/>
-            <column name="value" valueNumeric="10"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Swimming Pool"/>
-            <column name="value" valueNumeric="5"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Fitness Center"/>
-            <column name="value" valueNumeric="7"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Spa"/>
-            <column name="value" valueNumeric="3"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Restaurant"/>
-            <column name="value" valueNumeric="8"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Bar"/>
-            <column name="value" valueNumeric="6"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Parking"/>
-            <column name="value" valueNumeric="9"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Airport Shuttle"/>
-            <column name="value" valueNumeric="4"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Pet Friendly"/>
-            <column name="value" valueNumeric="2"/>
         </insert>
-
         <insert tableName="amenities">
             <column name="name" value="Room Service"/>
-            <column name="value" valueNumeric="10"/>
         </insert>
     </changeSet>
 
+
     <!-- Добавляем связи отелей с amenities -->
     <changeSet id="ins-data-amenity-2" author="anton">
+        <!-- Hotel 1: 5 amenities -->
         <insert tableName="hotel_amenities">
             <column name="hotel_id" valueNumeric="1"/>
             <column name="amenity_id" valueNumeric="1"/>
         </insert>
         <insert tableName="hotel_amenities">
             <column name="hotel_id" valueNumeric="1"/>
-            <column name="amenity_id" valueNumeric="3"/>
-        </insert>
-        <insert tableName="hotel_amenities">
-            <column name="hotel_id" valueNumeric="2"/>
             <column name="amenity_id" valueNumeric="2"/>
         </insert>
         <insert tableName="hotel_amenities">
-            <column name="hotel_id" valueNumeric="2"/>
+            <column name="hotel_id" valueNumeric="1"/>
+            <column name="amenity_id" valueNumeric="3"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="1"/>
             <column name="amenity_id" valueNumeric="4"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="1"/>
+            <column name="amenity_id" valueNumeric="5"/>
+        </insert>
+
+        <!-- Hotel 2: 2 amenities -->
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="2"/>
+            <column name="amenity_id" valueNumeric="1"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="2"/>
+            <column name="amenity_id" valueNumeric="6"/>
+        </insert>
+
+        <!-- Hotel 3: 1 amenity -->
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="3"/>
+            <column name="amenity_id" valueNumeric="7"/>
+        </insert>
+
+        <!-- Hotel 4: 3 amenities -->
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="4"/>
+            <column name="amenity_id" valueNumeric="8"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="4"/>
+            <column name="amenity_id" valueNumeric="9"/>
+        </insert>
+        <insert tableName="hotel_amenities">
+            <column name="hotel_id" valueNumeric="4"/>
+            <column name="amenity_id" valueNumeric="10"/>
         </insert>
         <insert tableName="hotel_amenities">
             <column name="hotel_id" valueNumeric="3"/>

@@ -2,6 +2,9 @@ package com.hotel.dao.specification;
 
 import com.hotel.model.entity.Hotel;
 import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.Subquery;
 import org.springframework.data.jpa.domain.Specification;
 
 
@@ -25,17 +28,11 @@ public class HotelSpecification implements SearchSpecification<Hotel> {
     public Specification<Hotel> toSpecification() {
         Specification<Hotel> spec = null;
 
-        Specification<Hotel> nameSpec = nameContains(name);
-        Specification<Hotel> brandSpec = brandContains(brand);
-        Specification<Hotel> citySpec = cityContains(city);
-        Specification<Hotel> countrySpec = countryContains(country);
-        Specification<Hotel> amenitySpec = hasAmenity(amenity);
-
-        spec = nameSpec;
-        spec = spec.and(brandSpec);
-        spec = spec.and(citySpec);
-        spec = spec.and(countrySpec);
-        spec = spec.and(amenitySpec);
+        spec = safeAnd(spec, nameContains(name));
+        spec = safeAnd(spec, brandContains(brand));
+        spec = safeAnd(spec, cityContains(city));
+        spec = safeAnd(spec, countryContains(country));
+        spec = safeAnd(spec, hasAmenity(amenity));
 
         return spec;
     }
@@ -69,14 +66,27 @@ public class HotelSpecification implements SearchSpecification<Hotel> {
         };
     }
 
-    public static Specification<Hotel> hasAmenity(String amenityName) {
+    public static Specification<Hotel> hasAmenity(String amenity) {
         return (root, query, cb) -> {
-            if (amenityName == null || amenityName.isBlank()) return null;
-            if (query != null) {
-                query.distinct(true);
-            }
-            Join<Object, Object> amenities = root.join("amenities");
-            return cb.like(cb.lower(amenities.get("name")), "%" + amenityName.toLowerCase() + "%");
+            if (amenity == null || amenity.isBlank()) return null;
+            Join<Object, Object> amenitiesJoin = root.join("amenities", JoinType.INNER);
+            return cb.like(cb.lower(amenitiesJoin.get("name")), "%" + amenity.toLowerCase() + "%");
         };
     }
+
+
+
+
+
+
+
+
+
+    private <T> Specification<T> safeAnd(Specification<T> spec1, Specification<T> spec2) {
+        if (spec1 == null) return spec2;
+        if (spec2 == null) return spec1;
+        return spec1.and(spec2);
+    }
+
+
 }

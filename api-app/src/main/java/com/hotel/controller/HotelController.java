@@ -1,11 +1,15 @@
 package com.hotel.controller;
 
+import com.hotel.dao.specification.HotelSpecification;
 import com.hotel.model.dto.HotelBriefDTO;
+import com.hotel.model.entity.Hotel;
 import com.hotel.service.HotelService;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/property-view")
@@ -35,5 +39,7 @@ public class HotelController {
     ) {
         return hotelService.searchHotels(name, brand, city, country, amenities);
     }
+
+
 
 }
