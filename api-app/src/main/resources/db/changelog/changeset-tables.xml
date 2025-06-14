@@ -3,11 +3,47 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="
-        http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+      http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!-- Таблица: address -->
+    <changeSet id="1" author="anton">
+        <createTable tableName="address">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="house_number" type="INT"/>
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(100)"/>
+            <column name="country" type="VARCHAR(100)"/>
+            <column name="post_code" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица: contacts -->
+    <changeSet id="2" author="anton">
+        <createTable tableName="contacts">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(100)"/>
+            <column name="email" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Таблица: arrival_time -->
+    <changeSet id="3" author="anton">
+        <createTable tableName="arrival_time">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="check_in" type="VARCHAR(10)"/>
+            <column name="check_out" type="VARCHAR(10)"/>
+        </createTable>
+    </changeSet>
 
     <!-- Таблица: amenities -->
-    <changeSet id="2" author="anton">
+    <changeSet id="4" author="anton">
         <createTable tableName="amenities">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -19,39 +55,36 @@
     </changeSet>
 
     <!-- Таблица: hotels -->
-    <changeSet id="3" author="anton">
+    <changeSet id="5" author="anton">
         <createTable tableName="hotels">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
+
             <column name="name" type="VARCHAR(255)"/>
             <column name="brand" type="VARCHAR(255)"/>
             <column name="description" type="TEXT"/>
-            <column name="location" type="VARCHAR(255)"/>
-            <column name="rating" type="DECIMAL(2,1)"/>
+
+            <!-- Embedded Address -->
+            <column name="house_number" type="INT"/>
+            <column name="street" type="VARCHAR(255)"/>
+            <column name="city" type="VARCHAR(100)"/>
+            <column name="country" type="VARCHAR(100)"/>
+            <column name="post_code" type="VARCHAR(20)"/>
+
+            <!-- Embedded Contacts -->
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="phone" type="VARCHAR(50)"/>
+
+            <!-- Embedded ArrivalTime -->
+            <column name="check_in" type="TIME"/>
+            <column name="check_out" type="TIME"/>
         </createTable>
     </changeSet>
 
-    <!-- Таблица: rooms -->
-    <changeSet id="4" author="anton">
-        <createTable tableName="rooms">
-            <column name="id" type="BIGINT" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="hotel_id" type="BIGINT">
-                <constraints nullable="false"
-                             foreignKeyName="fk_rooms_hotels"
-                             referencedTableName="hotels"
-                             referencedColumnNames="id"/>
-            </column>
-            <column name="room_number" type="VARCHAR(50)"/>
-            <column name="type" type="VARCHAR(100)"/>
-            <column name="price" type="DECIMAL(10,2)"/>
-        </createTable>
-    </changeSet>
 
     <!-- Таблица: hotel_amenities (связь M:N) -->
-    <changeSet id="5" author="anton">
+    <changeSet id="6" author="anton">
         <createTable tableName="hotel_amenities">
             <column name="hotel_id" type="BIGINT">
                 <constraints nullable="false"/>
