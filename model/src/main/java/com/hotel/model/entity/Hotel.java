@@ -2,7 +2,6 @@ package com.hotel.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,17 +19,22 @@ public class Hotel {
     private Long id;
 
     private String name;
+
     @Column(length = 2000)
     private String description;
+
     private String brand;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "contacts_id", referencedColumnName = "id")
     private Contacts contacts;
 
-    @Embedded
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "arrival_time_id", referencedColumnName = "id")
     private ArrivalTime arrivalTime;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

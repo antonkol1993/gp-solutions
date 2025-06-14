@@ -1,15 +1,22 @@
 package com.hotel.model.entity;
 
-import jakarta.persistence.Embeddable;
+import jakarta.persistence.*;
 import lombok.*;
 
-@Embeddable
+@Entity
+@Table(name = "arrival_time")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class ArrivalTime {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String checkIn;
+
     private String checkOut;
 }
