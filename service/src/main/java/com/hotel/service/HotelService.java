@@ -2,6 +2,7 @@ package com.hotel.service;
 
 import com.hotel.dao.repository.AmenityRepository;
 import com.hotel.dao.repository.HotelRepository;
+import com.hotel.dao.specification.HotelSpecification;
 import com.hotel.model.dto.*;
 import com.hotel.model.entity.Address;
 import com.hotel.model.entity.Amenity;
@@ -9,6 +10,7 @@ import com.hotel.model.entity.ArrivalTime;
 import com.hotel.model.entity.Contacts;
 import com.hotel.model.entity.Hotel;
 import com.hotel.web.ErrorResponse;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +33,8 @@ public class HotelService {
 
     public List<HotelBriefDTO> getAllHotelsBrief() {
         return hotelRepository.findAll().stream()
-            .map(this::mapToHotelBriefDTO)
-            .collect(Collectors.toList());
+                .map(this::mapToHotelBriefDTO)
+                .collect(Collectors.toList());
     }
 
     public ResponseEntity<?> getHotelDetail(Long id) {
@@ -47,40 +49,72 @@ public class HotelService {
         return ResponseEntity.ok(dto);
     }
 
+    public List<HotelBriefDTO> searchHotels(
+            String name, String brand, String city,
+            String country, String amenity) {
+
+        List<Specification<Hotel>> specs = List.of(
+                HotelSpecification.nameContains(name),
+                HotelSpecification.brandContains(brand),
+                HotelSpecification.cityContains(city),
+                HotelSpecification.countryContains(country),
+                HotelSpecification.hasAmenity(amenity)
+        );
+
+        Specification<Hotel> combinedSpec = combineSpecifications(specs);
+        List<Hotel> hotels = (combinedSpec == null)
+                ? hotelRepository.findAll()
+                : hotelRepository.findAll(combinedSpec);
+
+        return hotels.stream()
+                .map(this::mapToHotelBriefDTO)
+                .collect(Collectors.toList());
+    }
+
 
     private HotelBriefDTO mapToHotelBriefDTO(Hotel hotel) {
         return new HotelBriefDTO(
-            hotel.getId(),
-            hotel.getName(),
-            hotel.getDescription(),
-            formatAddress(hotel.getAddress()),
-            hotel.getContacts() != null ? hotel.getContacts().getPhone() : null
+                hotel.getId(),
+                hotel.getName(),
+                hotel.getDescription(),
+                formatAddress(hotel.getAddress()),
+                hotel.getContacts() != null ? hotel.getContacts().getPhone() : null
         );
     }
 
     private HotelDetailDTO mapToHotelDetailDTO(Hotel hotel) {
         return new HotelDetailDTO(
-            hotel.getId(),
-            hotel.getName(),
-            hotel.getDescription(),
-            hotel.getBrand(),
-            toAddressDTO(hotel.getAddress()),
-            toContactsDTO(hotel.getContacts()),
-            toArrivalTimeDTO(hotel.getArrivalTime()),
-            hotel.getAmenities() == null
-                ? List.of()
-                : hotel.getAmenities().stream().map(Amenity::getName).collect(Collectors.toList())
+                hotel.getId(),
+                hotel.getName(),
+                hotel.getDescription(),
+                hotel.getBrand(),
+                toAddressDTO(hotel.getAddress()),
+                toContactsDTO(hotel.getContacts()),
+                toArrivalTimeDTO(hotel.getArrivalTime()),
+                hotel.getAmenities() == null
+                        ? List.of()
+                        : hotel.getAmenities().stream().map(Amenity::getName).collect(Collectors.toList())
         );
+    }
+
+    private <T> Specification<T> combineSpecifications(List<Specification<T>> specs) {
+        Specification<T> result = null;
+        for (Specification<T> spec : specs) {
+            if (spec != null) {
+                result = (result == null) ? spec : result.and(spec);
+            }
+        }
+        return result;
     }
 
     private String formatAddress(Address address) {
         if (address == null) return null;
         return String.format("%d %s, %s, %s, %s",
-            address.getHouseNumber(),
-            address.getStreet(),
-            address.getCity(),
-            address.getPostCode(),
-            address.getCountry());
+                address.getHouseNumber(),
+                address.getStreet(),
+                address.getCity(),
+                address.getPostCode(),
+                address.getCountry());
     }
 
     private AddressDTO toAddressDTO(Address a) {

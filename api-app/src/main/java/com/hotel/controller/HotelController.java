@@ -3,10 +3,7 @@ package com.hotel.controller;
 import com.hotel.model.dto.HotelBriefDTO;
 import com.hotel.service.HotelService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,4 +25,15 @@ public class HotelController {
     public ResponseEntity<?> getHotelById(@PathVariable("id") Long id) {
         return hotelService.getHotelDetail(id);
     }
+    @GetMapping("/search")
+    public List<HotelBriefDTO> searchHotels(
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "brand", required = false) String brand,
+            @RequestParam(name = "city", required = false) String city,
+            @RequestParam(name = "country", required = false) String country,
+            @RequestParam(name = "amenities", required = false) String amenities
+    ) {
+        return hotelService.searchHotels(name, brand, city, country, amenities);
+    }
+
 }
