@@ -6,7 +6,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <!-- Вставка 10 записей arrival_time -->
-    <changeSet id="arrival-time-insert-3" author="anton">
+    <changeSet id="ins-data-arr-1" author="anton">
         <insert tableName="arrival_time">
             <column name="CHECK_IN" value="14:00:00"/>
             <column name="CHECK_OUT" value="23:00:00"/>
@@ -50,7 +50,7 @@
     </changeSet>
 
     <!-- Связывание arrival_time с отелями -->
-    <changeSet id="arrival-time-link-hotels-4" author="anton">
+    <changeSet id="ins-data-arr-2" author="anton">
         <update tableName="hotels">
             <column name="arrival_time_id" value="1"/>
             <where>id = 1</where>

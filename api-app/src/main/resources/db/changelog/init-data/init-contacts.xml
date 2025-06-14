@@ -6,7 +6,7 @@
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <!-- Добавляем контакты -->
-    <changeSet id="contacts-1" author="anton">
+    <changeSet id="ins-data-cont-1" author="anton">
         <insert tableName="contacts">
             <column name="phone" value="+375 17 309-80-00"/>
             <column name="email" value="contact1@example.com"/>
@@ -60,7 +60,7 @@
 
 
     <!-- Связываем контакты с отелями -->
-    <changeSet id="contacts-2" author="anton">
+    <changeSet id="ins-data-cont-2" author="anton">
         <update tableName="hotels">
             <column name="contacts_id" value="1"/>
             <where>id = 1</where>

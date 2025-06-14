@@ -6,7 +6,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="IData-H1" author="anton">
+    <changeSet id="ins-data-hot-1" author="anton">
         <insert tableName="hotels">
             <column name="name" value="DoubleTree by Hilton Minsk"/>
             <column name="brand" value="Hilton"/>

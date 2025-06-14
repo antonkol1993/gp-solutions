@@ -1,8 +1,8 @@
 package com.hotel.controller;
 
 import com.hotel.model.dto.HotelBriefDTO;
-import com.hotel.model.dto.HotelDetailDTO;
 import com.hotel.service.HotelService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ public class HotelController {
     }
 
     @GetMapping("/hotels/{id}")
-    public HotelDetailDTO getHotelById(@PathVariable Long id) {
+    public ResponseEntity<?> getHotelById(@PathVariable("id") Long id) {
         return hotelService.getHotelDetail(id);
     }
 }

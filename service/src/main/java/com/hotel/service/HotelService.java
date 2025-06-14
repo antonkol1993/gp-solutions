@@ -8,10 +8,14 @@ import com.hotel.model.entity.Amenity;
 import com.hotel.model.entity.ArrivalTime;
 import com.hotel.model.entity.Contacts;
 import com.hotel.model.entity.Hotel;
+import com.hotel.web.ErrorResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,11 +35,18 @@ public class HotelService {
             .collect(Collectors.toList());
     }
 
-    public HotelDetailDTO getHotelDetail(Long id) {
-        Hotel hotel = hotelRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Hotel not found with id " + id));
-        return mapToHotelDetailDTO(hotel);
+    public ResponseEntity<?> getHotelDetail(Long id) {
+        Optional<Hotel> optionalHotel = hotelRepository.findById(id);
+
+        if (optionalHotel.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ErrorResponse.of("Hotel not found with id " + id, HttpStatus.NOT_FOUND.value()));
+        }
+
+        HotelDetailDTO dto = mapToHotelDetailDTO(optionalHotel.get());
+        return ResponseEntity.ok(dto);
     }
+
 
     private HotelBriefDTO mapToHotelBriefDTO(Hotel hotel) {
         return new HotelBriefDTO(

@@ -22,6 +22,11 @@
             <artifactId>dao</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <!-- Spring Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
         <!--lombok -->
         <dependency>
